@@ -54,9 +54,9 @@ for step in range(1,n_iters):
     for i in range (0,len(X_train)):
         distance = np.max([0,1 - Y_train[i]*np.dot(W,X_train[i])])
         if distance == 0:
-            W -= (1/(step+1000))*(2*lambd*W)
+            W -= (1/(step*lambd))*(2*lambd*W)
         else:
-            W -= (1/(step+1000))*((2*lambd*W)-np.dot(X_train[i],Y_train[i]))
+            W -= (1/(step*lambd))*((2*lambd*W)-np.dot(X_train[i],Y_train[i]))
     Cost.append(CF(W,X_train,Y_train))
 
 def make_meshgrid(x,y,h=.02):
