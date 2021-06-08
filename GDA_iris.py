@@ -21,7 +21,11 @@ x_train = np.array(train_df.drop('variety',axis=1))
 y_test = np.array(test_df['variety'])
 x_test = np.array(test_df.drop('variety',axis=1))
 
+#This is a discriminative algorithm. Rather than finding a functional form between independent and dependent variables, we will take inference from the data itself.
+#We will have to fit the data itself with two gaussian distributions having means mu0 and mu1 with same sigma. The class is binary so we will also have to 
+#fit for bernoulli phi.
 
+#Minimising the max likelihood w.r.t phi, mu0, mu1 and sigma we get:
 phi = np.sum(y_train==1)/len(x_train)
 mu0 = np.mean(x_train[y_train==0,:],axis=0)
 mu1 = np.mean(x_train[y_train==1,:],axis=0)
@@ -29,6 +33,8 @@ mu1 = np.mean(x_train[y_train==1,:],axis=0)
 diff1 = x_train[y_train==0] - mu0
 diff2 = x_train[y_train==1] - mu1
 diff = np.concatenate((diff1,diff2),axis=0)
+
+
 
 sigma = np.matmul(diff.T,diff)/len(diff)
 
